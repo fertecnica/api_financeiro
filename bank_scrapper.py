@@ -30,7 +30,9 @@ class BankScrapper:
         driver.find_element(By.XPATH, '//button[contains(text(), "Li e aceito")]').click()
         
         # Aguarda até que o campo de email esteja visível
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'usuarioEmail')))
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'usuarioEmail'))) 
+
+        #MUDANÇA
         
         # Encontra o campo de email e insere o email
         driver.find_element(By.ID, 'usuarioEmail').send_keys('hassan.primo@fertecnica.net')
