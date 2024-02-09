@@ -31,14 +31,12 @@ class BankScrapper:
         
         # Aguarda até que o campo de email esteja visível
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'usuarioEmail'))) 
-
-        #MUDANÇA
         
         # Encontra o campo de email e insere o email
         driver.find_element(By.ID, 'usuarioEmail').send_keys('hassan.primo@fertecnica.net')
         
         # Aguarda até que o botão "PRÓXIMO" esteja visível
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//button[contains(text(), "PRÓXIMO")]')))
+        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="lookup"]/button')))
         
         # Clica no botão "PRÓXIMO"
         driver.find_element(By.XPATH, '//*[@id="lookup"]/button').click()
