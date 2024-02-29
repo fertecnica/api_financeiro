@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
+from time import sleep
 
 class FlashScrapper:
     def __init__(self, web_navigator):
@@ -18,16 +18,15 @@ class FlashScrapper:
         # Clica no botão "PRÓXIMO"
         self.web_navigator.click_element('//*[@id="lookup"]/button')
         
-        time.sleep(20)
-        
+        sleep(20)
         # Clica no botao Fertecnica
         self.web_navigator.click_element('//*[@id="modal-window-organization"]/div/div/div[2]/div/div/div[1]/div[1]/div[1]')
         
-        time.sleep(5)
+        sleep(5)
         # Encontra o campo de senha e insere a senha
         self.web_navigator.fill_input_field('//*[@id="senha"]', '3823D1C79418@')
         
-        time.sleep(30)
+        sleep(30)
         # Clica no botão de login
         self.web_navigator.click_element('//*[@id="login-submit-button"]')
         
@@ -43,10 +42,10 @@ class FlashScrapper:
 
         # Encontra o campo de data e define o valor para a data desejada
         self.web_navigator.fill_input_field('//*[@id="modal-window"]/div/div/div[2]/div/div/div[1]/div/div[1]/input', '01/07/2023')
-        time.sleep(30)
+        
+        sleep(30)
         # Clica no botão OK para iniciar o download do arquivo
         self.web_navigator.click_element('//button[contains(text(), "OK")]')
         
         print('O download do arquivo deve ter sido iniciado.')
-        
-        time.sleep(30)
+        sleep(30)
