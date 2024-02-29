@@ -7,7 +7,7 @@ calls = Blueprint('calls', __name__)
 @calls.route('/busca_despesas_flash')
 def index():
     # Inicialize o WebNavigator
-    navigator = WebNavigator('C:\\Users\\HassanPrimo\\OneDrive - FERTECNICA FERRAMENTAS E EQUIPAMENTOS LTDA\\Aplicativos\\msedgedriver.exe', 'C:\\Users\\HassanPrimo\\Downloads\\recaptcha.crx')
+    navigator = WebNavigator('msedgedriver.exe', 'recaptcha.crx')
 
     # Acessa a pagina de login do relatorio
     navigator.navigate_to_page('https://app.expenseon.com/admin/login?ReturnURL=/admin/financeiro/relatorio')
