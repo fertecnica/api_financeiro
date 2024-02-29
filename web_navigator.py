@@ -1,3 +1,4 @@
+import os
 from selenium import webdriver
 from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
@@ -9,6 +10,13 @@ class WebNavigator:
     def __init__(self, driver_path, extension_path):
         edge_options = Options()
         edge_service = Service(driver_path)
+
+        # Define o diretório de download para a pasta 'Relatorio Flash' no diretório atual
+        current_directory = os.getcwd()
+        download_directory = os.path.join(current_directory, 'Relatorio Flash')
+        edge_options.add_experimental_option("prefs", {
+            "download.default_directory": download_directory
+        })
 
         # Adiciona a extensao .crx
         edge_options.add_extension(extension_path)
