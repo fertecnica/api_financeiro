@@ -32,3 +32,13 @@ class DataProcessor:
         df['Valor Excedente'] = df['Valor Excedente'].apply(lambda x: x if x > 0 else 0)
 
         return df
+
+    # Define o periodo da analise
+    def filter_by_date(self, df, date_column, start_date, end_date):
+        # Convertendo a coluna "Data da Despesa" para datetime
+        df[date_column] = pd.to_datetime(df[date_column])
+
+        # Filtrando o DataFrame para obter somente as datas desejadas
+        df = df[(df[date_column] >= start_date) & (df[date_column] <= end_date)]
+        
+        return df
