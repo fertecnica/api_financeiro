@@ -6,5 +6,7 @@ calls = Blueprint('calls', __name__)
 
 @calls.route('/busca_despesas_flash')
 def index():
-    BankScrapper().scrapping_process()
+    # Inicialize o WebNavigator
+    navigator = WebNavigator('C:\\Users\\HassanPrimo\\OneDrive - FERTECNICA FERRAMENTAS E EQUIPAMENTOS LTDA\\Aplicativos\\msedgedriver.exe', 'C:\\Users\\HassanPrimo\\Downloads\\recaptcha.crx')
+
     return 'OK'
