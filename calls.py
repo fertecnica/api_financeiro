@@ -1,6 +1,7 @@
 from flask import Blueprint
 from flash_scrapper import FlashScrapper
 from web_navigator import WebNavigator
+from data_process import DataProcessor
 
 calls = Blueprint('calls', __name__)
 
@@ -23,5 +24,15 @@ def index():
 
     # Execute o processo de scrapping
     scrapper.scrapper_process()
+
+    # Começa a analisar os dados do arquivo
+    processor = DataProcessor('C:\\Users\\HassanPrimo\\Downloads')  # Substitua por seu caminho
+    
+    # Arquivo ja tratado
+    df = processor.data_organize()
+
+    # Define datas limites para a coluna Data da Despesa
+    df = processor.filter_by_date(df, 'Data da Despesa', '2023-07-01', '2023-12-31')
+
 
     return 'OK'
