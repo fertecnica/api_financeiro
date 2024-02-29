@@ -33,3 +33,20 @@ class FlashScrapper:
         
         # Aguarda até que a página de relatórios seja carregada
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, 'badgeFinanceiroRelatorio')))
+
+    def scrapper_process(self):
+        # Abre as configuraçoes do relatorio
+        self.web_navigator.click_element('//*[@id="export-excel-container"]/div/small/strong/a')
+        
+        # Retira o input padrao
+        self.web_navigator.clear_input_field('//*[@id="modal-window"]/div/div/div[2]/div/div/div[1]/div/div[1]/input')
+
+        # Encontra o campo de data e define o valor para a data desejada
+        self.web_navigator.fill_input_field('//*[@id="modal-window"]/div/div/div[2]/div/div/div[1]/div/div[1]/input', '01/07/2023')
+        time.sleep(30)
+        # Clica no botão OK para iniciar o download do arquivo
+        self.web_navigator.click_element('//button[contains(text(), "OK")]')
+        
+        print('O download do arquivo deve ter sido iniciado.')
+        
+        time.sleep(30)
