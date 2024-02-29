@@ -32,3 +32,8 @@ class WebNavigator:
     def fill_input_field(self, locator, input_text, locator_type=By.XPATH, wait_time=10):
         input_field = WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located((locator_type, locator)))
         input_field.send_keys(input_text)
+
+    # Aguarda até que o campo de entrada esteja visível e então limpa o conteúdo do campo
+    def clear_input_field(self, locator, locator_type=By.XPATH, wait_time=10):
+        input_field = WebDriverWait(self.driver, wait_time).until(EC.visibility_of_element_located((locator_type, locator)))
+        input_field.clear()
