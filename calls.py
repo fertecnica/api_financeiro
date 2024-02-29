@@ -1,5 +1,6 @@
 from flask import Blueprint
-from bank_scrapper import BankScrapper
+from flash_scrapper import FlashScrapper
+from web_navigator import WebNavigator
 
 calls = Blueprint('calls', __name__)
 
