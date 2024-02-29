@@ -2,14 +2,21 @@ from flask import Blueprint
 from flash_scrapper import FlashScrapper
 from web_navigator import WebNavigator
 from data_process import DataProcessor
+import os
 
 calls = Blueprint('calls', __name__)
 
 @calls.route('/busca_despesas_flash')
 def index():
-    # Inicialize o WebNavigator
-    navigator = WebNavigator('msedgedriver.exe', 'recaptcha.crx')
+    # Obtém o caminho do diretório atual
+    current_dir = os.path.dirname(os.path.realpath(__file__))
 
+    # Constrói os caminhos completos para o driver e a extensão
+    driver_path = os.path.join(current_dir, 'msedgedriver.exe')
+    extension_path = os.path.join(current_dir, 'recaptcha.crx')
+
+    # Inicializa o WebNavigator com os caminhos corretos
+    navigator = WebNavigator(driver_path, extension_path)
     # Acessa a pagina de login do relatorio
     navigator.navigate_to_page('https://app.expenseon.com/admin/login?ReturnURL=/admin/financeiro/relatorio')
 
