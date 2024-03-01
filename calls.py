@@ -33,7 +33,7 @@ def index():
     scrapper.scrapper_process()
 
     # Define o caminho para a pasta 'Relatorio Flash' no diretório atual
-    download_directory = os.path.join(current_dir, 'Relatorio Flash')
+    download_directory = os.path.join(current_dir, 'relatorio_flash')
 
     # Começa a analisar os dados do arquivo
     processor = DataProcessor(download_directory)
