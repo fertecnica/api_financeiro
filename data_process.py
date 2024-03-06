@@ -29,10 +29,21 @@ class DataProcessor:
                                                              35 if row['Categoria'] == 'Refeição' else
                                                              40 if row['Categoria'] == 'Estacionamento' else
                                                              0 if row['Categoria'] in ['Despesas ambulatoriais ou medicações', 'Estacionamento', 'Refeição', 'Lavagem de veículos', 'Hospedagem'] else
-                                                             row['Valor']), axis=1)
+                                                             row['Valor']), axis=1
+                                                            )
 
         # Substituindo valores negativos por 0 na coluna 'Valor Excedente'
         df['Valor Excedente'] = df['Valor Excedente'].apply(lambda x: x if x > 0 else 0)
+
+        # Seleciona apenas as colunas específicas para conversão
+        colunas_para_converter = ['CPF Solicitante', 
+                                  'CNPJ Filial Solicitante', 
+                                  'No. Comprovante',
+                                 'Nº Centro de Custo', 
+                                 'ID Despesa', 'Natureza']
+        
+        # Nao vou fazer calculos com esses dados
+        df[colunas_para_converter] = df[colunas_para_converter].astype(str)
 
         return df
 
