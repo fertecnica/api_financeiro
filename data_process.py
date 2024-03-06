@@ -1,10 +1,13 @@
 from data_tools import DataTools
 import pandas as pd
+from datetime import datetime
+import os
+import json
 
 class DataProcessor:
-    def __init__(self, download_path):
-        self.download_path = download_path
-        self.tools = DataTools(download_path)
+    def __init__(self, caminho_utilizado):
+        self.caminho_utilizado = caminho_utilizado
+        self.tools = DataTools(caminho_utilizado)
 
     # Organiza e trata a informaçao
     def data_organize(self):
@@ -12,7 +15,7 @@ class DataProcessor:
         latest_file = self.tools.get_latest_file()
 
         # Lendo o arquivo excel referente ao relatorio flash
-        df = pd.read_excel(f'{self.download_path}\\{latest_file}')
+        df = pd.read_excel(f'{self.caminho_utilizado}\\{latest_file}')
 
         # Elimina as colunas vazias
         df = df.dropna(how='all', axis=1)
@@ -42,3 +45,31 @@ class DataProcessor:
         df = df[(df[date_column] >= start_date) & (df[date_column] <= end_date)]
         
         return df
+    
+    def ajustar_colunas_datas(self, df):
+        """
+        Ajusta automaticamente a largura das colunas que contêm datas.
+        """
+        for coluna in df.columns:
+            if pd.api.types.is_datetime64_any_dtype(df[coluna]):
+                df[coluna] = df[coluna].dt.strftime('%Y-%m-%d %H:%M:%S')
+
+        print("Colunas com datas ajustadas automaticamente!")
+    
+    # Converte o DataFrame para um arquivo JSON e salva na pasta relatorio_flash.
+    def salvar_df_como_json(self, df, nome_arquivo):
+        # Converta o DataFrame para um dicionário
+        df_dict = df.to_dict()
+
+        # Encontre o caminho completo para a pasta relatorio_flash
+        caminho_relatorio = self.caminho_utilizado
+
+        # Crie a pasta se ela não existir
+        if not os.path.exists(caminho_relatorio):
+            os.makedirs(caminho_relatorio)
+
+        # Salve o dicionário como um arquivo JSON
+        with open(os.path.join(caminho_relatorio, nome_arquivo), 'w') as arquivo_json:
+            json.dump(df_dict, arquivo_json)
+
+        print(f"Arquivo JSON '{nome_arquivo}' salvo com sucesso na pasta relatorio_flash!")

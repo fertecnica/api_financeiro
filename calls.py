@@ -32,8 +32,8 @@ def index():
     # Execute o processo de scrapping
     scrapper.scrapper_process()
 
-    # Define o caminho para a pasta 'Relatorio Flash' no diretório atual
-    download_directory = os.path.join(current_dir, 'relatorio_flash')
+    # Define o caminho para a pasta 'downloads' no diretório atual
+    download_directory = os.path.join(current_dir, 'downloads')
 
     # Começa a analisar os dados do arquivo
     processor = DataProcessor(download_directory)
@@ -43,6 +43,16 @@ def index():
 
     # Define datas limites para a coluna Data da Despesa
     df = processor.filter_by_date(df, 'Data da Despesa', '2023-07-01', '2023-12-31')
+    
+    processor.ajustar_colunas_datas(df)
 
+    # Define o caminho para a pasta 'relatorio_flash' no diretório atual
+    relatorio_directory = os.path.join(current_dir, 'relatorio_flash')
+
+    # Começa os procedimentos necessarios para converter os dados
+    conversor = DataProcessor(relatorio_directory)
+
+    # Converte para json e salva na pasta 'relatorio_flash'
+    conversor.salvar_df_como_json(df, 'relatorio')
 
     return 'OK'

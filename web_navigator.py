@@ -13,7 +13,7 @@ class WebNavigator:
 
         # Define o diretório de download para a pasta 'Relatorio Flash' no diretório atual
         current_directory = os.getcwd()
-        download_directory = os.path.join(current_directory, 'Relatorio Flash')
+        download_directory = os.path.join(current_directory, 'downloads')
         edge_options.add_experimental_option("prefs", {
             "download.default_directory": download_directory
         })
