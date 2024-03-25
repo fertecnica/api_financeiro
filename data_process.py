@@ -15,7 +15,7 @@ class DataProcessor:
         latest_file = self.tools.get_latest_file()
 
         # Lendo o arquivo excel referente ao relatorio flash
-        df = pd.read_excel(f'{self.caminho_utilizado}\\{latest_file}')
+        df = pd.read_excel(f'{self.caminho_utilizado}/{latest_file}')
 
         # Elimina as colunas vazias
         df = df.dropna(how='all', axis=1)
@@ -33,7 +33,7 @@ class DataProcessor:
                                                             )
 
         # Substituindo valores negativos por 0 na coluna 'Valor Excedente'
-        df['Valor Excedente'] = df['Valor Excedente'].apply(lambda x: x if x > 0 else 0)
+        # df['Valor Excedente'] = df['Valor Excedente'].apply(lambda x: x if x > 0 else 0)
 
         # Seleciona apenas as colunas específicas para conversão
         colunas_para_converter = ['CPF Solicitante', 
@@ -49,6 +49,7 @@ class DataProcessor:
 
     # Define o periodo da analise
     def filter_by_date(self, df, date_column, start_date, end_date):
+        print(f'DF -> {df}')
         # Convertendo a coluna "Data da Despesa" para datetime
         df[date_column] = pd.to_datetime(df[date_column])
 
